@@ -66,15 +66,15 @@ si a aparut in 1991. Ulterior au aparut limbaje și tehnologii pentru crearea de
 
 Eu am inceput sa invat HTML din intamplare, la facultate, primul proiect a fost o pagina web despre echipa mea de Counter Strike.
 
+    * Quiz: Voi stiti vreun site web?
+            Haideti sa va arat codul pt un site web ("View Source")
+
     * Fact: In lumea programarii vei intalni foarte multe acronime:
         AI - Artificial inteligence, 
         TIC - (intreaba copii ce inseamna)
         BRB - Be right back, 
         CPU – Central Processing Unit, 
         HTML - HyperText Markup Language
-
-    * Quiz: Voi stiti vreun site web?
-            Haideti sa va arat codul pt un site web ("View Source")
 
 ## Detalii proiect
 
