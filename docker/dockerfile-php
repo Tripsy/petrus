@@ -1,0 +1,51 @@
+# Base image
+FROM php:8.3-fpm
+
+# Install required dependencies for nvm and Node.js
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    libz-dev \
+    libcurl4-openssl-dev \
+    locales \
+    zip \
+    unzip \
+    && apt-get clean
+
+# Install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash \
+    && export NVM_DIR="/root/.nvm" \
+    && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+    && nvm install 22 \
+    && nvm use 22 \
+    && nvm alias default 22 \
+    && node -v \
+    && npm -v
+
+# Install pnpm globally using npm
+RUN export NVM_DIR="/root/.nvm" \
+    && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+    && npm install -g pnpm \
+    && pnpm --version
+
+# Add nvm, node, and pnpm to PATH
+ENV NVM_DIR="/root/.nvm"
+ENV PATH="$NVM_DIR/versions/node/v22.12.0/bin:$PATH"
+
+# Verify installation
+RUN node -v && npm -v && pnpm --version
+
+# Install Redis extension
+RUN pecl install -o -f redis \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable redis
+
+# Install PDO MySQL extension
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Tailwind
+RUN pnpm add -D tailwindcss postcss autoprefixer \
+    && pnpm dlx tailwindcss init \
+
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*

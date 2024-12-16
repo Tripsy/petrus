@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.class-column {
+    @apply py-2;
+}
+
+.class-student {
+    @apply font-bold text-center bg-white rounded-lg drop-shadow-md py-2 px-3;
+}
+
+.class-student i {
+    @apply opacity-50;
+}
+
+.class-members {
+    @apply min-h-10 w-full
+}
+
+.class-members .class-student {
+    @apply inline-block mr-2 mb-2;
+}
+
+.class-row {
+    @apply grid grid-cols-2 gap-4 w-full px-4 py-2 min-h-20 relative;
+}
+
+.class-row .class-row-number {
+    @apply font-bold text-6xl text-black/20 absolute left-4;
+}
+
+.class-row .class-student {
+    @apply flex justify-evenly items-center min-h-12;
+}
+
+.class-row .class-student i {
+    @apply text-2xl;
+}

@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+    nginx:
+        container_name: laravel.nginx
+        image: nginx:1.25.3
+        ports:
+            - "80:80"
+            - "5173:5173"
+        volumes:
+            - .:/var/www/html
+            - ./docker/default.conf.template:/etc/nginx/templates/default.conf.template
+            - ./docker/error.log:/var/log/nginx/error.log
+        environment:
+            SERVER_NAME: laravel.test
+        depends_on:
+            - php
+    php:
+        container_name: laravel.php
+        build:
+            context: .
+            dockerfile: docker/dockerfile-php
+        volumes:
+            - .:/var/www/html
+            - ./docker/docker-php.ini:/usr/local/etc/php/conf.d/docker-php.ini
+networks:
+    default:
+        name: local-coding
